@@ -12,24 +12,43 @@ let firstNameMarkup = '',
     (letter, idx) => (firstNameMarkup += `<p class=p${idx}>${letter}</p>`)
   );
   surnameArr.forEach(
-    (letter, idx) => (surnameMarkup += `<p class=p${idx + 5}>${letter}</p>`)
+    (letter, idx) =>
+      (surnameMarkup += `<p class=p${idx + firstName.length}>${letter}</p>`)
   );
 })();
 
 function endAnimationWithStyle(i) {
-  if (i == (firstName.length + surname.length - 1)){
+  setTimeout(() => {
+    resizeFirstLetters();
+  }, 1200);
 
-    document.querySelector('.first-name')
-    .firstChild.classList.add('bigger-letter');
-    document.querySelector('.surname').firstChild.classList.add('bigger-letter');
-    document.querySelector('.fancy-border').classList.add('fancy-border-animated');
+  setTimeout(() => {
+    addFancyBorder();
+  }, 1600);
+}
+
+function areLettersDoneDropping(idx) {
+  if (idx === firstName.length + surname.length - 1) {
+    endAnimationWithStyle();
   }
+}
+
+function resizeFirstLetters() {
+  document
+    .querySelector('.first-name')
+    .firstChild.classList.add('bigger-letter');
+  document.querySelector('.surname').firstChild.classList.add('bigger-letter');
+}
+
+function addFancyBorder() {
+  document
+    .querySelector('.fancy-border')
+    .classList.add('fancy-border-animated');
 }
 
 function animateLetters(i) {
   setTimeout(() => {
     document.querySelector(`.p${i}`).classList.add('animated');
-    endAnimationWithStyle(i);
   }, i * 100);
 }
 
@@ -42,5 +61,6 @@ window.onload = () => {
 
   for (let i = 0; i < firstName.length + surname.length; i++) {
     animateLetters(i);
+    areLettersDoneDropping(i);
   }
 };

@@ -54,7 +54,7 @@ html, body {
 
 .bigger-letter{
     transform: scale(2);
-    transition: all 0.3s 0.3s cubic-bezier(0.440, -0.600, 0.575, 5);
+    transition: all 0.5s cubic-bezier(0.440, -0.600, 0.575, 2);
     padding-right: 3px;
 }
 
